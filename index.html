@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+        <title>Kart-n-Blast Racing</title>
+		<script type="text/javascript" src="js/phaser.js"></script>
+	    <style type="text/css">
+	        body {
+	            margin: 0;
+	        }
+	    </style>
+	</head>
+
+	<body>
+	    <script type="text/javascript">
+
+	    window.onload = function() {
+
+	    	var game = new Phaser.Game(800, 600, Phaser.AUTO, 'kart-n-blast-racing', {preload: preload, create: create, update: update, render: render});
+
+	    	var car;
+	    	var cursors;
+
+	    	var STEERING_ANGLE = 4;
+	    	var KART_SPEED = 300;
+	    	var KART_DRAG = KART_SPEED * 2;
+
+	    	function preload () {
+	    		game.load.image('kart','img/kart24x16.png');
+	    	}
+
+	    	function create () {
+	    		game.physics.startSystem(Phaser.Physics.ARCADE);
+
+	    		kart = game.add.sprite(game.world.centerX, game.world.height - 50, 'kart');
+	    		kart.anchor.setTo(0.2, 0.5);
+	    		game.physics.enable(kart, Phaser.Physics.ARCADE);
+	    		kart.body.drag.set(KART_DRAG);
+			    kart.body.maxVelocity.setTo(KART_SPEED, KART_SPEED);
+			    kart.body.collideWorldBounds = true;
+
+	    		cursors = game.input.keyboard.createCursorKeys();
+	    	}
+
+	    	function update () {
+
+	    		if (cursors.left.isDown) {
+	    			kart.angle -= STEERING_ANGLE;
+	    		} else if (cursors.right.isDown) {
+	    			kart.angle += STEERING_ANGLE;
+	    		}
+
+	    		if (cursors.up.isDown) {
+	    			game.physics.arcade.accelerationFromRotation(kart.rotation, KART_SPEED, kart.body.acceleration);
+	    		} else {
+				    kart.body.acceleration.x = 0;
+				    kart.body.acceleration.y = 0;
+	    		}
+
+	    	}
+
+	    	function render() {
+			    game.debug.spriteInfo(kart, 32, 32);
+			    game.debug.text('velocity: ' + kart.body.velocity, 32, 200);
+			    game.debug.text('acceleration: ' + kart.body.acceleration, 32, 232);
+			    game.debug.text('drag: ' + kart.body.drag, 32, 264);
+			}
+
+	    };
+
+	    </script>
+	</body>
+</html>

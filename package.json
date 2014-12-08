@@ -1,0 +1,19 @@
+{
+  "name": "kart-n-blast-racing",
+  "version": "0.0.0",
+  "description": "kart racing with blasting",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alvarocavalcanti/kart-n-blast-racing.git"
+  },
+  "author": "Alvaro Cavalcanti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alvarocavalcanti/kart-n-blast-racing/issues"
+  },
+  "homepage": "https://github.com/alvarocavalcanti/kart-n-blast-racing"
+}

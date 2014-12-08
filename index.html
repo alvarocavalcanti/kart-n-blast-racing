@@ -43,6 +43,9 @@
 
 	    	function update () {
 
+			    kart.body.acceleration.x = 0;
+			    kart.body.acceleration.y = 0;
+
 	    		if (cursors.left.isDown) {
 	    			kart.angle -= STEERING_ANGLE;
 	    		} else if (cursors.right.isDown) {
@@ -50,10 +53,7 @@
 	    		}
 
 	    		if (cursors.up.isDown) {
-	    			game.physics.arcade.accelerationFromRotation(kart.rotation, KART_SPEED, kart.body.acceleration);
-	    		} else {
-				    kart.body.acceleration.x = 0;
-				    kart.body.acceleration.y = 0;
+	    			game.physics.arcade.accelerationFromRotation(kart.rotation, KART_SPEED * 2, kart.body.acceleration);
 	    		}
 
 	    	}

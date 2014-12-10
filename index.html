@@ -20,9 +20,10 @@
 	    	var car;
 	    	var cursors;
 
-	    	var STEERING_ANGLE = 4;
-	    	var KART_SPEED = 300;
-	    	var KART_DRAG = KART_SPEED * 2;
+	    	var STEERING_ANGLE = 1;
+	    	var KART_ACCELERATION = 200;
+	    	var KART_DRAG = KART_ACCELERATION * 2;
+	    	var ANGULAR_SPEED = 60;
 
 	    	function preload () {
 	    		game.load.image('kart','img/kart24x16.png');
@@ -35,25 +36,35 @@
 	    		kart.anchor.setTo(0.2, 0.5);
 	    		game.physics.enable(kart, Phaser.Physics.ARCADE);
 	    		kart.body.drag.set(KART_DRAG);
-			    kart.body.maxVelocity.setTo(KART_SPEED, KART_SPEED);
+			    kart.body.maxVelocity.setTo(KART_ACCELERATION * 2, KART_ACCELERATION * 2);
 			    kart.body.collideWorldBounds = true;
+
+			    kart.angle -= 90;
 
 	    		cursors = game.input.keyboard.createCursorKeys();
 	    	}
 
 	    	function update () {
 
-			    kart.body.acceleration.x = 0;
-			    kart.body.acceleration.y = 0;
+			    acc = KART_ACCELERATION;
 
 	    		if (cursors.left.isDown) {
 	    			kart.angle -= STEERING_ANGLE;
+	    			acc = KART_ACCELERATION;
 	    		} else if (cursors.right.isDown) {
 	    			kart.angle += STEERING_ANGLE;
+	    			acc = KART_ACCELERATION;
+	    		} else {
+	    			kart.body.angularVelocity = 0;
 	    		}
 
 	    		if (cursors.up.isDown) {
-	    			game.physics.arcade.accelerationFromRotation(kart.rotation, KART_SPEED * 2, kart.body.acceleration);
+	    			// game.physics.arcade.accelerationFromRotation(kart.rotation, acc, kart.body.acceleration);
+	    			// game.physics.arcade.velocityFromRotation(kart.rotation, acc, kart.body.acceleration);
+	    			kart.body.acceleration.x = Math.cos(kart.rotation) * acc;
+	    			kart.body.acceleration.y = Math.sin(kart.rotation) * acc;
+	    		} else {
+	    			kart.body.acceleration.setTo(0,0);
 	    		}
 
 	    	}

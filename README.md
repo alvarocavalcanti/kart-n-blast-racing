@@ -14,7 +14,7 @@ A battle-racing game, inspired by Rock n Roll Racing
 ### The more, the merrier
 
 1. Two karts
-1. Unique karts (different acc and handling)
+1. Unique karts (different attrbs)
 
 ### Keep you eyes on the road
 
@@ -32,6 +32,7 @@ A battle-racing game, inspired by Rock n Roll Racing
 1. Shooting (Simple)
 1. Missiles
 1. Bombs
+1. Special Rules (activates weapons and shields after the second lap)
 
 ### Every me and every you
 
